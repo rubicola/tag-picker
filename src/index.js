@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { SnackbarProvider } from "notistack";
-import App from "./App";
+import App from "./components/App";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

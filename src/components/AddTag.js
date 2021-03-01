@@ -14,11 +14,11 @@ const useStyles = makeStyles(() => ({
   addTagIcon: {
     verticalAlign: "middle",
     color: "lightGrey",
-    marginRight: "5px"
+    marginRight: "1rem"
   }
 }));
 
-const AddTag = ({ newTag, handleTagInput, availableTags }) => {
+const AddTag = ({ newTag, handleTagInput, availableTags, filteredTagTitles }) => {
   const classes = useStyles();
 
   const [readyForInput, setReadyForInput] = useState(false);
@@ -54,6 +54,7 @@ const AddTag = ({ newTag, handleTagInput, availableTags }) => {
             label={
               <TagAutoComplete
                 availableTags={availableTags}
+                filteredTagTitles={filteredTagTitles}
                 startValue={newTag}
                 handleTagInput={handleTagInput}
                 toggleAddTagReady={toggleAddTagReady}
@@ -69,7 +70,8 @@ const AddTag = ({ newTag, handleTagInput, availableTags }) => {
 AddTag.propTypes = {
   newTag: PropTypes.string,
   handleTagInput: PropTypes.func.isRequired,
-  availableTags: PropTypes.array.isRequired
+  availableTags: PropTypes.array.isRequired,
+  filteredTagTitles: PropTypes.array.isRequired
 };
 
 export default AddTag;

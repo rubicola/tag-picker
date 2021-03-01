@@ -9,7 +9,7 @@ import AddTag from "./AddTag";
 import {
   createTag,
   assignUserTag,
-} from "../api";
+} from "../lib/api";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -36,7 +36,7 @@ const TagsContainer = ({ user, allTags, handleUpdateUser }) => {
   };
 
   const getTagDetails = (tagTitle) => {
-    return allTags?.filter(tag => tag === tagTitle);
+    return allTags?.find(tag => tag.title === tagTitle);
   };
 
   const handleTagInput = async (tagTitle) => {
@@ -46,7 +46,7 @@ const TagsContainer = ({ user, allTags, handleUpdateUser }) => {
       if (!details || details.length === 0) {
         value = await createTag({ title: tagTitle });
       } else {
-        value = tagTitle;
+        value = details;
       }
       handleTagLoading(true);
       const assignTagResult = await assignUserTag(user.uuid, value.uuid);
@@ -65,6 +65,8 @@ const TagsContainer = ({ user, allTags, handleUpdateUser }) => {
     if (!userHasTag) availableTags.push(tag);
     return userHasTag;
   });
+
+  const filteredTagTitles = filteredTags?.map(tag => tag.title);
 
   return (
     <Card
@@ -87,7 +89,11 @@ const TagsContainer = ({ user, allTags, handleUpdateUser }) => {
             handleTagLoading={handleTagLoading} />
         )}
         {showAddTag &&
-          <AddTag handleTagInput={handleTagInput} newTag={newTag} availableTags={availableTags} />
+          <AddTag
+            handleTagInput={handleTagInput}
+            newTag={newTag}
+            availableTags={availableTags}
+            filteredTagTitles={filteredTagTitles} />
         }
         {tagLoading &&
           <div className={classes.cp} >
@@ -101,6 +107,7 @@ const TagsContainer = ({ user, allTags, handleUpdateUser }) => {
 
 TagsContainer.propTypes = {
   user: PropTypes.object,
+  allTags: PropTypes.array,
   handleUpdateUser: PropTypes.func.isRequired
 };
 

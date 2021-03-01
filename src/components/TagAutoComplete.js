@@ -12,16 +12,18 @@ const useStyles = makeStyles(() => ({
     marginRight: "5px"
   },
   selectedTitle: {
-    fontSize: "8px",
+    fontSize: "0.5rem",
     width: "30vw"
   }
 }));
 
 const filter = createFilterOptions();
 
-const TagAutoComplete = ({ startValue, availableTags, handleTagInput, toggleAddTagReady }) => {
+const TagAutoComplete = ({ startValue, availableTags, filteredTagTitles, handleTagInput, toggleAddTagReady }) => {
   const classes = useStyles();
   const [value, setValue] = useState(startValue);
+
+  const availableTagsTitles = availableTags?.map(tag => tag.title);
 
   useEffect(() => {
     if (value) {
@@ -37,14 +39,14 @@ const TagAutoComplete = ({ startValue, availableTags, handleTagInput, toggleAddT
       onChange={(event, newValue) => {
         if (newValue?.createNew) {
           setValue(newValue.inputValue);
-        } else {
+        } else if (availableTagsTitles?.includes(newValue.title)) {
           setValue(newValue.title);
         }
       }}
       filterOptions={(options, params) => {
-        debugger;
         const filtered = filter(options, params);
-        if (params.inputValue !== "") {
+        // prevent duplicate named tags
+        if (params.inputValue !== "" && !filteredTagTitles?.includes(params.inputValue)) {
           filtered.push({
             createNew: true,
             inputValue: params.inputValue,
@@ -94,6 +96,7 @@ const TagAutoComplete = ({ startValue, availableTags, handleTagInput, toggleAddT
 TagAutoComplete.propTypes = {
   startValue: PropTypes.string,
   availableTags: PropTypes.array,
+  filteredTags: PropTypes.array,
   handleTagInput: PropTypes.func.isRequired,
   toggleAddTagReady: PropTypes.func.isRequired
 };

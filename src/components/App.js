@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Container, Typography } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import { makeStyles } from "@material-ui/core/styles";
-import LoadingScreen from "./components/Loading";
+import LoadingScreen from "./Loading";
 
 import {
   fetchTags,
   fetchUser,
-} from "./api";
+} from "../lib/api";
 
-import TagsContainer from "./components/TagsContainer";
+import TagsContainer from "./TagsContainer";
 
 const useStyles = makeStyles(() => ({
   rootContainer: {

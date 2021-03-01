@@ -6,7 +6,7 @@ import ClearIcon from "@material-ui/icons/Clear";
 
 import {
   removeUserTag
-} from "../api";
+} from "../lib/api";
 
 const chipStyle = (color) => {
   return {
