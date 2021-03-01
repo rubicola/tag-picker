@@ -13,8 +13,12 @@ import TagsContainer from "./TagsContainer";
 
 const useStyles = makeStyles(() => ({
   rootContainer: {
-    padding: "20px",
+    padding: "2rem",
   },
+  author: {
+    paddingTop: "1rem",
+    float: "right"
+  }
 }));
 
 const userId = "1111-2222-3333-4444";
@@ -58,6 +62,11 @@ const App = () => {
           {user?.fullName}
         </Typography>
         <TagsContainer user={user} allTags={allTags} handleUpdateUser={handleUpdateUser} />
+        <div className={classes.author}>
+          <Typography color="primary" variant={"caption"}>
+            by Joni
+          </Typography>
+        </div>
       </LoadingScreen>
     </Container>
   );
