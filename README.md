@@ -7,3 +7,4 @@ If I were to spend more time on this, I would include:
     - remove underline underneath new tag text input
     - border colour to be darker than tag background colour
 - alternatives for mouse hover events if on mobile/touch device
+- greater error handling
