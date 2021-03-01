@@ -1,0 +1,8 @@
+{
+  "short_name": "Tag Picker",
+  "name": "Tag Picker Component for Raisley assessment",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
